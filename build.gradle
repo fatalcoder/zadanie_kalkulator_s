@@ -1,6 +1,6 @@
 plugins {
     id 'org.springframework.boot' version '2.1.4.RELEASE'
-    id 'java'w2
+    id 'java'
     id 'war'
 }
 
