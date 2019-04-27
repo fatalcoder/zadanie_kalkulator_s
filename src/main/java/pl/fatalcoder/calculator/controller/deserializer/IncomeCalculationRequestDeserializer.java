@@ -1,5 +1,6 @@
 package pl.fatalcoder.calculator.controller.deserializer;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -20,15 +21,19 @@ public class IncomeCalculationRequestDeserializer extends JsonDeserializer<Incom
   @Override
   public IncomeCalculationRequest deserialize(JsonParser jsonParser, DeserializationContext deserializationContext)
       throws IOException, JsonProcessingException {
-    TreeNode treeNode = jsonParser.getCodec()
-        .readTree(jsonParser);
+    try {
+      TreeNode treeNode = jsonParser.getCodec()
+          .readTree(jsonParser);
 
-    TextNode countryCodeNode = (TextNode) treeNode.get(FIELD_COUNTRY_CODE);
-    NumericNode dailyIncomeWithTaxNode = (NumericNode) treeNode.get(FIELD_DAILY_INCOME_WITH_TAX);
+      TextNode countryCodeNode = (TextNode) treeNode.get(FIELD_COUNTRY_CODE);
+      NumericNode dailyIncomeWithTaxNode = (NumericNode) treeNode.get(FIELD_DAILY_INCOME_WITH_TAX);
 
-    return new IncomeCalculationRequest(
-        countryCodeNode.asText(),
-        dailyIncomeWithTaxNode.asInt()
-    );
+      return new IncomeCalculationRequest(
+          countryCodeNode.asText(),
+          dailyIncomeWithTaxNode.asInt()
+      );
+    } catch (RuntimeException exception) {
+      throw new JsonParseException(jsonParser, "Error during deserializing request body", exception);
+    }
   }
 }
