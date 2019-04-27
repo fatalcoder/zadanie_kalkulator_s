@@ -1,7 +1,6 @@
 package pl.fatalcoder.calculator.repository;
 
 import org.springframework.stereotype.Repository;
-import pl.fatalcoder.calculator.model.Amount;
 import pl.fatalcoder.calculator.model.Country;
 import pl.fatalcoder.calculator.repository.exception.CountryNotFoundRepositoryException;
 
@@ -19,7 +18,8 @@ public class CountryRepository {
             "United Kingdom",
             "UK",
             25,
-            new Amount(600, Currency.getInstance("GBP"))
+            600,
+            Currency.getInstance("GBP")
         )
     );
     countries.add(
@@ -27,7 +27,8 @@ public class CountryRepository {
             "Deutschland",
             "DE",
             20,
-            new Amount(800, Currency.getInstance("EUR"))
+            800,
+            Currency.getInstance("EUR")
         )
     );
     countries.add(
@@ -35,7 +36,8 @@ public class CountryRepository {
             "Polska",
             "PL",
             19,
-            new Amount(1200, Currency.getInstance("PLN"))
+            1200,
+            Currency.getInstance("PLN")
         )
     );
   }
@@ -46,7 +48,8 @@ public class CountryRepository {
 
   public Country getCountryByCode(String code) {
     return countries.stream()
-        .filter(country -> country.getCode().equals(code))
+        .filter(country -> country.getCode()
+            .equals(code))
         .findFirst()
         .orElseThrow(() -> new CountryNotFoundRepositoryException(code));
   }

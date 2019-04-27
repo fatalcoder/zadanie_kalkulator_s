@@ -17,7 +17,7 @@ public class CountryController {
     this.countryRepository = countryRepository;
   }
 
-  @GetMapping(value = "")
+  @GetMapping
   public List<Country> getCountries() {
     return countryRepository.getCountries();
   }

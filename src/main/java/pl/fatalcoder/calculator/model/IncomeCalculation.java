@@ -1,7 +1,4 @@
-package pl.fatalcoder.calculator.controller.dto;
-
-import pl.fatalcoder.calculator.model.Amount;
-import pl.fatalcoder.calculator.model.Country;
+package pl.fatalcoder.calculator.model;
 
 public class IncomeCalculation {
   private final Amount dailyIncomeWithTax;
