@@ -9,7 +9,7 @@ import java.util.Currency;
 public class ExchangeService {
   private final ExchangeRateProvider exchangeRateProvider;
 
-  public ExchangeService(@Qualifier("StaticRates") ExchangeRateProvider exchangeRateProvider) {
+  public ExchangeService(@Qualifier("ExchangeRatesApi") ExchangeRateProvider exchangeRateProvider) {
     this.exchangeRateProvider = exchangeRateProvider;
   }
 
