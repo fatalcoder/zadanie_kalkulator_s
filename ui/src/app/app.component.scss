@@ -1,0 +1,21 @@
+.alert {
+  p {
+    margin: 0;
+  }
+
+  ul {
+    margin: 0;
+
+    li {
+      margin-bottom: 5px;
+
+      :last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.calculation-result {
+  margin-top: 30px;
+}

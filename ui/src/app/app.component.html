@@ -1,0 +1,37 @@
+<div class="container">
+  <h1>Income calculator</h1>
+
+  <div class="alert alert-danger" role="alert" *ngIf="hasErrors()">
+    <ul>
+      <li *ngFor="let error of getErrors()">{{ error }}</li>
+    </ul>
+  </div>
+
+  <form [formGroup]="incomeForm" (ngSubmit)="calculateIncome()">
+
+    <div class="form-group">
+      <label for="country-select">Country of income</label>
+      <select class="form-control" id="country-select" formControlName="countryCode" required>
+        <option *ngFor="let item of counties$ | async" [value]="item.code">{{ item.name }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="daily-income">Daily income with TAX</label>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Daily income with tax" aria-label="Daily income with tax"
+               aria-describedby="basic-addon2" id="daily-income" formControlName="dailyIncome" required>
+        <div class="input-group-append">
+          <span class="input-group-text" id="basic-addon2">{{ selectedCountryCurrencyCode$ | async }}</span>
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-secondary" [disabled]="!incomeForm.valid">Calculate
+    </button>
+  </form>
+
+  <div class="calculation-result">
+    <h2>Your income without taxes and costs will be: {{ monthlyIncome }}</h2>
+  </div>
+</div>
